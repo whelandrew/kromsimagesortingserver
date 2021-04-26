@@ -1,0 +1,27 @@
+{
+  "name": "imagesortingserver",
+  "version": "1.0.0",
+  "description": "hosted server for communications with imagesorting",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whelandrew/imagesortingserver.git"
+  },
+  "author": "Andrew Whelan <whelandrew@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/whelandrew/imagesortingserver/issues"
+  },
+  "homepage": "https://github.com/whelandrew/imagesortingserver#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dropbox": "^9.6.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "pg": "^8.6.0"
+  }
+}
