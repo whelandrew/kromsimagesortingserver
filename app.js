@@ -68,25 +68,17 @@ app.get('/auth', function(req, res) {
 });
 ////////////////////////////
 
-app.post('/GetMetaData', function(req, res) 
+
+
+app.post('/ShowImage', function(req, res) 
 {			
-	console.log('GetMetaData');	
-	axios({
-		method: 'post',
-		url: 'https://api.dropboxapi.com/2/sharing/get_file_metadata',		
-		headers: {
-				'Content-Type' : 'application/json', 
-				'Authorization' : token
-			},
-		data : 
-		{
-			file:req.body.id
-		}
-	})	
-	.then(function (response) {
-		res.send(response.data.path_lower);		
-	})
-	.catch(function (error) {
+	console.log('ShowImage');	
+	try
+	{
+		let view = require('./views/showImage.pg');
+		res.status(200).send(view);
+	}
+	catch(function (error) {
 		console.log(error);
 		res.status(500).send(error);
 	});
