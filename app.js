@@ -73,15 +73,17 @@ app.get('/auth', function(req, res) {
 app.post('/ShowImage', function(req, res) 
 {			
 	console.log('ShowImage');	
-	try
-	{
+	axios({
+		method: 'post',	
+	})	
+	.then(function (response) {
 		let view = require('./views/showImage.pg');
 		res.status(200).send(view);
-	}
-	catch(function (error) {
+	})
+	.catch(function (error) {
 		console.log(error);
 		res.status(500).send(error);
-	});
+	});	
 })
 
 app.post('/ListSharedLinks', function(req, res) 
