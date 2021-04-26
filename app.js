@@ -68,22 +68,52 @@ app.get('/auth', function(req, res) {
 });
 ////////////////////////////
 
-
-
-app.post('/ShowImage', function(req, res) 
+app.post('/GetMetaData', function(req, res) 
 {			
-	console.log('ShowImage');	
+	console.log('GetMetaData');	
 	axios({
-		method: 'post',	
+		method: 'post',
+		url: 'https://api.dropboxapi.com/2/sharing/get_file_metadata',		
+		headers: {
+				'Content-Type' : 'application/json', 
+				'Authorization' : token
+			},
+		data : 
+		{
+			file:req.body.id
+		}
 	})	
 	.then(function (response) {
-		let view = require('./views/showImage.pg');
-		res.status(200).send(view);
+		res.send(response.data.path_lower);		
 	})
 	.catch(function (error) {
 		console.log(error);
 		res.status(500).send(error);
-	});	
+	});
+})
+
+app.post('/ListSharedLinks', function(req, res) 
+{			
+	console.log('ListSharedLinks');	
+	axios({
+		method: 'post',
+		url: 'https://api.dropboxapi.com/2/sharing/list_shared_links',		
+		headers: {
+				'Content-Type' : 'application/json', 
+				'Authorization' : token
+			},
+		data : 
+		{
+			path:req.body.id
+		}
+	})	
+	.then(function (response) {
+		res.send(JSON.stringify(response.data.links));
+	})
+	.catch(function (error) {
+		console.log(error);
+		res.status(500).send(error);
+	});
 })
 
 app.post('/ListSharedLinks', function(req, res) 
