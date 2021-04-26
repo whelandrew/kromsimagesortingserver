@@ -116,30 +116,6 @@ app.post('/ListSharedLinks', function(req, res)
 	});
 })
 
-app.post('/ListSharedLinks', function(req, res) 
-{			
-	console.log('ListSharedLinks');	
-	axios({
-		method: 'post',
-		url: 'https://api.dropboxapi.com/2/sharing/list_shared_links',		
-		headers: {
-				'Content-Type' : 'application/json', 
-				'Authorization' : token
-			},
-		data : 
-		{
-			path:req.body.id
-		}
-	})	
-	.then(function (response) {
-		res.send(JSON.stringify(response.data.links));
-	})
-	.catch(function (error) {
-		console.log(error);
-		res.status(500).send(error);
-	});
-})
-
 app.post('/ListFolder', function(req, res) 
 {			
 	console.log("ListFolder");	
