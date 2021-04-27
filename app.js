@@ -176,8 +176,8 @@ app.post('/GetAllFolders', function (request, response, next)
 			}
 	})
 	 .then(function (res)
-	 {		
-		response.send(JSON.stringify(res.data));				
+	 {			
+		response.send(JSON.stringify(res.file_requests));
 	})
 	.catch(function (error) {		
 		console.log(error);
