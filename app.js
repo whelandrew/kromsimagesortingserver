@@ -108,8 +108,28 @@ app.post('/ListSharedLinks', function(req, res)
 		}
 	})	
 	.then(function (response) {
-		console.log(response.data);
-		res.send(JSON.stringify(response.data.links));
+		/*
+		.tag: "file"
+		client_modified: "2018-12-10T22:46:10Z"
+		content_hash: "b24f7b0a02cb8b071e9ae5685bae256da89a2bef5d3153debe6072e02919e02a"
+		id: "id:bF0UIWdpidUAAAAAAAMVfg"
+		is_downloadable: true
+		name: "tumblr_nxndikHZJ51tg5e8po10_400.gif"
+		path_display: "/Private/pr0n/tumblr_nxndikHZJ51tg5e8po10_400.gif"
+		path_lower: "/private/pr0n/tumblr_nxndikhzj51tg5e8po10_400.gif"
+		rev: "5a177d548fde60799e058"
+		server_modified: "2020-03-22T21:02:15Z"
+		size: 1694102
+		*/
+		let data = [];
+		for(let i=0;i<response.data.links.length;i++)
+		{
+			let newD = response.data.links[i];
+			newD.newHTML = "<img src=\""+newD.path_lower.replace('dl=0','dl=1')+"\" alt=\"An Image\"/>";
+			data.push(newD);
+		}		
+		
+		res.send(JSON.stringify(data));
 	})
 	.catch(function (error) {
 		console.log(error);
