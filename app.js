@@ -174,8 +174,9 @@ app.post('/GetAllFolders', function (request, response, next)
 				'Authorization' : token
 			}
 	})
-	 .then(function (res)
-	 {			
+	.then(function (response)
+	{
+		console.log(response);
 		res.send(JSON.stringify(response));
 	})
 	.catch(function (error) {		
