@@ -108,19 +108,6 @@ app.post('/ListSharedLinks', function(req, res)
 		}
 	})	
 	.then(function (response) {
-		/*
-		.tag: "file"
-		client_modified: "2018-12-10T22:46:10Z"
-		content_hash: "b24f7b0a02cb8b071e9ae5685bae256da89a2bef5d3153debe6072e02919e02a"
-		id: "id:bF0UIWdpidUAAAAAAAMVfg"
-		is_downloadable: true
-		name: "tumblr_nxndikHZJ51tg5e8po10_400.gif"
-		path_display: "/Private/pr0n/tumblr_nxndikHZJ51tg5e8po10_400.gif"
-		path_lower: "/private/pr0n/tumblr_nxndikhzj51tg5e8po10_400.gif"
-		rev: "5a177d548fde60799e058"
-		server_modified: "2020-03-22T21:02:15Z"
-		size: 1694102
-		*/
 		let data = [];
 		for(let i=0;i<response.data.links.length;i++)
 		{
@@ -167,6 +154,36 @@ app.post('/ListFolder', function(req, res)
 			res.status(500).send(error);
 		});			
 })
+
+app.post('/GetAllFolders', function (request, response, next)
+{  		
+	console.log('GetAllFolders');	
+	axios({
+		method: 'post',
+		url: 'https://api.dropboxapi.com/2/files/list_folder',
+		data:{
+				'path': '',
+				'recursive': false,
+				'include_media_info': false,
+				'include_deleted': false,
+				'include_has_explicit_shared_members': false,
+				'include_mounted_folders': true,
+				'include_non_downloadable_files': false
+			},
+		headers: {
+				'Content-Type' : 'application/json', 
+				'Authorization' : token
+			}
+	})
+	 .then(function (res)
+	 {		
+		response.send(JSON.stringify(res.data));				
+	})
+	.catch(function (error) {		
+		console.log(error);
+		response.status(500).send(error);
+	});	
+});	
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
