@@ -146,7 +146,6 @@ app.post('/ListFolder', function(req, res)
 		})
 		.then(function (response)
 		{
-			console.log(res);
 			res.send(JSON.stringify(response.data.entries));
 		})
 		.catch(function (error) {
@@ -177,7 +176,7 @@ app.post('/GetAllFolders', function (request, response, next)
 	})
 	 .then(function (res)
 	 {			
-		response.send(JSON.stringify(res.file_requests));
+		response.send(JSON.stringify(res));
 	})
 	.catch(function (error) {		
 		console.log(error);
