@@ -108,6 +108,7 @@ app.post('/ListSharedLinks', function(req, res)
 		}
 	})	
 	.then(function (response) {
+		console.log(response.data);
 		res.send(JSON.stringify(response.data.links));
 	})
 	.catch(function (error) {
