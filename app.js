@@ -157,7 +157,8 @@ app.post('/ListFolder', function(req, res)
 app.post('/GetAllFolders', function(req, res) 
 {			
 	console.log("GetAllFolders");	
-	method: 'post',
+	axios({
+		method: 'post',
 		url: 'https://api.dropboxapi.com/2/sharing/list_folders',
 		data: {
 			limit:1000
