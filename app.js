@@ -154,36 +154,29 @@ app.post('/ListFolder', function(req, res)
 		});			
 })
 
-app.post('/GetAllFolders', function (request, response, next)
-{  		
-	console.log('GetAllFolders');	
-	axios({
-		method: 'post',
-		url: 'https://api.dropboxapi.com/2/files/list_folder',
-		data:{
-				'path': '',
-				'recursive': false,
-				'include_media_info': false,
-				'include_deleted': false,
-				'include_has_explicit_shared_members': false,
-				'include_mounted_folders': true,
-				'include_non_downloadable_files': false
-			},
+app.post('/GetAllFolders', function(req, res) 
+{			
+	console.log("GetAllFolders");	
+	method: 'post',
+		url: 'https://api.dropboxapi.com/2/sharing/list_folders',
+		data: {
+			limit:1000
+		},
 		headers: {
 				'Content-Type' : 'application/json', 
 				'Authorization' : token
 			}
-	})
-	.then(function (response)
-	{
-		console.log(response);
-		//res.send(JSON.stringify(response));
-	})
-	.catch(function (error) {		
-		console.log(error);
-		response.status(500).send(error);
-	});	
-});	
+		})
+		.then(function (response)
+		{
+			console.log(response);
+			res.send(JSON.stringify(response));
+		})
+		.catch(function (error) {
+			console.log(error);
+			res.status(500).send(error);
+		});			
+})
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
